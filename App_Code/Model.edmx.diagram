@@ -5,16 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bfb888a5238d415593254fc2aa762b60" Name="Diagram1">
-        <EntityTypeShape EntityType="PontajeModel.Project" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PontajeModel.Right" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PontajeModel.Project" Width="1.5" PointX="4.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PontajeModel.Role" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PontajeModel.User" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PontajeModel.UsersToRole" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="PontajeModel.FK__UsersToRo__role___2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="PontajeModel.FK__UsersToRo__user___2D27B809" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PontajeModel.Pontaje" Width="1.5" PointX="5" PointY="7" />
-        <AssociationConnector Association="PontajeModel.FK__Pontaje__id_proj__4CA06362" />
-        <AssociationConnector Association="PontajeModel.FK__Pontaje__id_user__4BAC3F29" />
+        <AssociationConnector Association="PontajeModel.FK__Users__id_role__0A9D95DB" />
+        <EntityTypeShape EntityType="PontajeModel.Pontaje" Width="1.5" PointX="4.375" PointY="7" />
+        <AssociationConnector Association="PontajeModel.FK__Pontaje__id_proj__14270015" />
+        <AssociationConnector Association="PontajeModel.FK__Pontaje__id_user__1332DBDC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,14 +23,6 @@
           <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="Rights">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="255" />
-        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="id" />
@@ -49,16 +41,9 @@
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_role" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="UsersToRoles">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="role_id" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__Pontaje__id_proj__693CA210">
+        <Association Name="FK__Pontaje__id_proj__14270015">
           <End Role="Projects" Type="Self.Projects" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -72,7 +57,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pontaje__id_user__68487DD7">
+        <Association Name="FK__Pontaje__id_user__1332DBDC">
           <End Role="Users" Type="Self.Users" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -86,56 +71,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UsersToRo__role___6383C8BA">
+        <Association Name="FK__Users__id_role__0A9D95DB">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="UsersToRoles" Type="Self.UsersToRoles" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="UsersToRoles">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UsersToRo__user___628FA481">
-          <End Role="Users" Type="Self.Users" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsersToRoles" Type="Self.UsersToRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UsersToRoles">
-              <PropertyRef Name="user_id" />
+            <Dependent Role="Users">
+              <PropertyRef Name="id_role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PontajeModelStoreContainer">
           <EntitySet Name="Pontaje" EntityType="Self.Pontaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rights" EntityType="Self.Rights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsersToRoles" EntityType="Self.UsersToRoles" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Pontaje__id_proj__693CA210" Association="Self.FK__Pontaje__id_proj__693CA210">
+          <AssociationSet Name="FK__Pontaje__id_proj__14270015" Association="Self.FK__Pontaje__id_proj__14270015">
             <End Role="Projects" EntitySet="Projects" />
             <End Role="Pontaje" EntitySet="Pontaje" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pontaje__id_user__68487DD7" Association="Self.FK__Pontaje__id_user__68487DD7">
+          <AssociationSet Name="FK__Pontaje__id_user__1332DBDC" Association="Self.FK__Pontaje__id_user__1332DBDC">
             <End Role="Users" EntitySet="Users" />
             <End Role="Pontaje" EntitySet="Pontaje" />
           </AssociationSet>
-          <AssociationSet Name="FK__UsersToRo__role___6383C8BA" Association="Self.FK__UsersToRo__role___6383C8BA">
+          <AssociationSet Name="FK__Users__id_role__0A9D95DB" Association="Self.FK__Users__id_role__0A9D95DB">
             <End Role="Roles" EntitySet="Roles" />
-            <End Role="UsersToRoles" EntitySet="UsersToRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UsersToRo__user___628FA481" Association="Self.FK__UsersToRo__user___628FA481">
             <End Role="Users" EntitySet="Users" />
-            <End Role="UsersToRoles" EntitySet="UsersToRoles" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -149,15 +114,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pontajes" Relationship="PontajeModel.FK__Pontaje__id_proj__4CA06362" FromRole="Project" ToRole="Pontaje" />
-        </EntityType>
-        <EntityType Name="Right">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pontajes" Relationship="PontajeModel.FK__Pontaje__id_proj__14270015" FromRole="Project" ToRole="Pontaje" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -166,7 +123,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UsersToRoles" Relationship="Self.FK__UsersToRo__role___2E1BDC42" FromRole="Roles" ToRole="UsersToRoles" />
+          <NavigationProperty Name="Users" Relationship="PontajeModel.FK__Users__id_role__0A9D95DB" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -178,67 +135,42 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="UsersToRoles" Relationship="Self.FK__UsersToRo__user___2D27B809" FromRole="Users" ToRole="UsersToRoles" />
-          <NavigationProperty Name="Pontajes" Relationship="PontajeModel.FK__Pontaje__id_user__4BAC3F29" FromRole="User" ToRole="Pontaje" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="PontajeModel.FK__Users__id_role__0A9D95DB" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Pontajes" Relationship="PontajeModel.FK__Pontaje__id_user__1332DBDC" FromRole="User" ToRole="Pontaje" />
         </EntityType>
-        <EntityType Name="UsersToRole">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="role_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__UsersToRo__role___2E1BDC42" FromRole="UsersToRoles" ToRole="Roles" />
-          <NavigationProperty Name="User" Relationship="Self.FK__UsersToRo__user___2D27B809" FromRole="UsersToRoles" ToRole="Users" />
-        </EntityType>
-        <Association Name="FK__UsersToRo__role___2E1BDC42">
-          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
-          <End Role="UsersToRoles" Type="Self.UsersToRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UsersToRoles">
-              <PropertyRef Name="role_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UsersToRo__user___2D27B809">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="UsersToRoles" Type="Self.UsersToRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UsersToRoles">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="PontajeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Projects" EntityType="Self.Project" />
-          <EntitySet Name="Rights" EntityType="Self.Right" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UsersToRoles" EntityType="Self.UsersToRole" />
-          <AssociationSet Name="FK__UsersToRo__role___2E1BDC42" Association="Self.FK__UsersToRo__role___2E1BDC42">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="UsersToRoles" EntitySet="UsersToRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UsersToRo__user___2D27B809" Association="Self.FK__UsersToRo__user___2D27B809">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UsersToRoles" EntitySet="UsersToRoles" />
+          <AssociationSet Name="FK__Users__id_role__0A9D95DB" Association="PontajeModel.FK__Users__id_role__0A9D95DB">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="Pontajes" EntityType="PontajeModel.Pontaje" />
-          <AssociationSet Name="FK__Pontaje__id_proj__4CA06362" Association="PontajeModel.FK__Pontaje__id_proj__4CA06362">
+          <AssociationSet Name="FK__Pontaje__id_proj__14270015" Association="PontajeModel.FK__Pontaje__id_proj__14270015">
             <End Role="Project" EntitySet="Projects" />
             <End Role="Pontaje" EntitySet="Pontajes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pontaje__id_user__4BAC3F29" Association="PontajeModel.FK__Pontaje__id_user__4BAC3F29">
+          <AssociationSet Name="FK__Pontaje__id_user__1332DBDC" Association="PontajeModel.FK__Pontaje__id_user__1332DBDC">
             <End Role="User" EntitySet="Users" />
             <End Role="Pontaje" EntitySet="Pontajes" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__Users__id_role__0A9D95DB">
+          <End Type="PontajeModel.Role" Role="Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PontajeModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Pontaje">
           <Key>
             <PropertyRef Name="id" />
@@ -248,11 +180,13 @@
           <Property Name="id_project" Type="Int32" Nullable="false" />
           <Property Name="start_time" Type="DateTime" Precision="3" />
           <Property Name="finish_time" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Project" Relationship="PontajeModel.FK__Pontaje__id_proj__4CA06362" FromRole="Pontaje" ToRole="Project" />
-          <NavigationProperty Name="User" Relationship="PontajeModel.FK__Pontaje__id_user__4BAC3F29" FromRole="Pontaje" ToRole="User" />
+          <NavigationProperty Name="Project" Relationship="PontajeModel.FK__Pontaje__id_proj__14270015" FromRole="Pontaje" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="PontajeModel.FK__Pontaje__id_user__1332DBDC" FromRole="Pontaje" ToRole="User" />
         </EntityType>
-        <Association Name="FK__Pontaje__id_proj__4CA06362">
-          <End Type="PontajeModel.Project" Role="Project" Multiplicity="1" />
+        <Association Name="FK__Pontaje__id_proj__14270015">
+          <End Type="PontajeModel.Project" Role="Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PontajeModel.Pontaje" Role="Pontaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -263,8 +197,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pontaje__id_user__4BAC3F29">
-          <End Type="PontajeModel.User" Role="User" Multiplicity="1" />
+        <Association Name="FK__Pontaje__id_user__1332DBDC">
+          <End Type="PontajeModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PontajeModel.Pontaje" Role="Pontaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -290,15 +226,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rights">
-            <EntityTypeMapping TypeName="PontajeModel.Right">
-              <MappingFragment StoreEntitySet="Rights">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="PontajeModel.Role">
               <MappingFragment StoreEntitySet="Roles">
@@ -311,21 +238,13 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PontajeModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsersToRoles">
-            <EntityTypeMapping TypeName="PontajeModel.UsersToRole">
-              <MappingFragment StoreEntitySet="UsersToRoles">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="role_id" ColumnName="role_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -340,7 +259,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

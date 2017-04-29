@@ -24,9 +24,7 @@ public partial class PontajeEntities : DbContext
     }
 
     public DbSet<Project> Projects { get; set; }
-    public DbSet<Right> Rights { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<UsersToRole> UsersToRoles { get; set; }
     public DbSet<Pontaje> Pontajes { get; set; }
 }

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
+
+
 public partial class AdminMain : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -70,40 +72,82 @@ public partial class AdminMain : System.Web.UI.Page
 
     protected void ButtonCancel_Click(object sender, EventArgs e)
     {
-        //Response.Redirect("AdminMain.aspx");
+        var tbs = new List<System.Web.UI.WebControls.TextBox>() { TextBoxName, TextBoxDescription };
+        foreach (var textBox in tbs)
+        {
+            textBox.Text = "";
+        }
     }
 
     protected void ButtonSave_Click(object sender, EventArgs e)
     {
-        //    PontajeEntities pe = new PontajeEntities();
-        //    Project proiect = new Project();
-        //    proiect.name = TextBoxName.Text;
-        //    proiect.description = TextBoxDescription.Text;
-        //    pe.Projects.Add(proiect);
-        //    pe.SaveChanges();
+        PontajeEntities pe = new PontajeEntities();
+        Project proiect = new Project();
+        proiect.name = TextBoxName.Text;
+        proiect.description = TextBoxDescription.Text;
+        pe.Projects.Add(proiect);
+        pe.SaveChanges();
+        GridViewProjects.DataBind();
 
 
-        using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-SJS4A6Q\SQLEXPRESS;Initial Catalog=Pontaje_v2;Integrated Security=True"))
-        using (SqlCommand sc = new SqlCommand("insert into Projects values(@name, @description)", con))
-        {
-            con.Open();
-           
-            sc.Parameters.AddWithValue("@firstname", TextBoxName.Text);
-            sc.Parameters.AddWithValue("@lastname", TextBoxDescription.Text);
-          
-           
-                sc.ExecuteNonQuery();
-
-              
-
-            
-            con.Close();
-        }
+      
     }
 
 
 
 
+    protected void ButtonGrantAdminRights_Click(object sender, EventArgs e)
+    {
+        PontajeEntities pe = new PontajeEntities();
+        var user = (from u in pe.Users where u.username == TextBoxUsername.Text select u).FirstOrDefault();
+        if (user != null)
+        {
+            user.id_role = 1;
+            pe.SaveChanges();
+            GridViewUsers.DataBind();
+        }
+        else
+        {
+            Response.Write("Username does not exist!");
+        }
+    }
 
+    protected void ButtonRevokeAdminRights_Click(object sender, EventArgs e)
+    {
+        PontajeEntities pe = new PontajeEntities();
+        var user = (from u in pe.Users where u.username == TextBoxUsername.Text select u).FirstOrDefault();
+        if (user != null)
+        {
+            user.id_role = 2;
+            pe.SaveChanges();
+            GridViewUsers.DataBind();
+        }
+        else
+        {
+            Response.Write("Username does not exist!");
+        }
+    }
 
+    public string GetLabelText(object dataItem)
+    {
+        string text = "";
+        int? val = dataItem as int?;
+        switch (val)
+        {
+            case 1:
+                text = "Admin";
+                break;
+            case 2:
+                text = "Normal user";
+                break;
+
+        }
+        return text;
+    }
+
+    protected void ButtonLogout_Click(object sender, EventArgs e)
+    {
+        Session.RemoveAll();
+        Response.Redirect("Login.aspx");
+    }
 }

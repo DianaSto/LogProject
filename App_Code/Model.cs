@@ -36,32 +36,24 @@ public partial class Project
     public virtual ICollection<Pontaje> Pontajes { get; set; }
 }
 
-public partial class Right
-{
-    public int id { get; set; }
-    public string name { get; set; }
-    public string description { get; set; }
-}
-
 public partial class Role
 {
     public Role()
     {
-        this.UsersToRoles = new HashSet<UsersToRole>();
+        this.Users = new HashSet<User>();
     }
 
     public int id { get; set; }
     public string name { get; set; }
     public string description { get; set; }
 
-    public virtual ICollection<UsersToRole> UsersToRoles { get; set; }
+    public virtual ICollection<User> Users { get; set; }
 }
 
 public partial class User
 {
     public User()
     {
-        this.UsersToRoles = new HashSet<UsersToRole>();
         this.Pontajes = new HashSet<Pontaje>();
     }
 
@@ -71,17 +63,8 @@ public partial class User
     public string email { get; set; }
     public string username { get; set; }
     public string password { get; set; }
-
-    public virtual ICollection<UsersToRole> UsersToRoles { get; set; }
-    public virtual ICollection<Pontaje> Pontajes { get; set; }
-}
-
-public partial class UsersToRole
-{
-    public int id { get; set; }
-    public int user_id { get; set; }
-    public int role_id { get; set; }
+    public int id_role { get; set; }
 
     public virtual Role Role { get; set; }
-    public virtual User User { get; set; }
+    public virtual ICollection<Pontaje> Pontajes { get; set; }
 }

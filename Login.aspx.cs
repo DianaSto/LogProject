@@ -62,7 +62,7 @@ public partial class Login : System.Web.UI.Page
             PontajeEntities pe = new PontajeEntities();
             
             int id_user = (from user in pe.Users where user.username == username select user.id).FirstOrDefault();
-            int id_role= (from users_to_roles in pe.UsersToRoles where users_to_roles.user_id == id_user select users_to_roles.role_id).FirstOrDefault();
+            int id_role= (from user in pe.Users where user.username == username select user.id_role).FirstOrDefault();
             string user_role= (from roles in pe.Roles where roles.id == id_role select roles.name).FirstOrDefault().ToString();
             if (user_role=="Admin")
             {

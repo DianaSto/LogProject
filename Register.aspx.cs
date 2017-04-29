@@ -27,7 +27,7 @@ public partial class Register : System.Web.UI.Page
     protected void ButtonRegister_Click(object sender, EventArgs e)
     {
         using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-SJS4A6Q\SQLEXPRESS;Initial Catalog=Pontaje_v2;Integrated Security=True"))
-        using (SqlCommand sc = new SqlCommand("insert into Users values(@firstname, @lastname, @email, @username, @password)", con))
+        using (SqlCommand sc = new SqlCommand("insert into Users values(@firstname, @lastname, @email, @username, @password, @role)", con))
         {
             con.Open();
             string username = TextBoxUsername.Text;
@@ -45,23 +45,22 @@ public partial class Register : System.Web.UI.Page
             }
             else
             {
-                sc.ExecuteNonQuery();
+                
 
                 PontajeEntities pe = new PontajeEntities();
-                int id_user = (from user in pe.Users where user.username == username select user.id).FirstOrDefault();
+               
                 int number_users = (from user in pe.Users select user).Count();
-                if (number_users == 1)
+                if (number_users == 0)
                 {
-                    SqlCommand sc1 = new SqlCommand("insert into UsersToRoles values(@userId, 1)", con);
-                    sc1.Parameters.AddWithValue("@userId", id_user);
-                    sc1.ExecuteNonQuery();
+                    sc.Parameters.AddWithValue("@role", 1);
+                   
                 }
                 else
                 {
-                    SqlCommand sc1 = new SqlCommand("insert into UsersToRoles values(@userId, 2)", con);
-                    sc1.Parameters.AddWithValue("@userId", id_user);
-                    sc1.ExecuteNonQuery();
+                    sc.Parameters.AddWithValue("@role", 2);
+                   
                 }
+                sc.ExecuteNonQuery();
                 Response.Redirect("Login.aspx");
 
             }
