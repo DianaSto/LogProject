@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <title></title>
 </head>
 <body>
@@ -11,7 +12,21 @@
     <div>
         Successfully logged in as normal user
     </div>
-        <asp:GridView ID="gvProjects" CssClass="Grid" runat="server" AutoGenerateColumns="false"  PageSize="10" AllowPaging="true" DataSourceID="dsProjects" OnRowCommand="GridView_RowCommand">
+        <asp:GridView ID="gvProjects" CssClass="Grid" runat="server" AutoGenerateColumns="false"  PageSize="10" AllowPaging="true" DataSourceID="SqlDataSourceLogs" OnRowCommand="GridView_RowCommand">
+
+             <EmptyDataRowStyle CssClass="EmptyData" />
+                <EmptyDataTemplate>
+
+                    <div>
+                        No Data Available
+                    </div>
+
+                    <script>
+                        $(".EmptyData").parents("table").css("border-width", "0px").prop("border", "0");
+                    </script>
+
+               </EmptyDataTemplate>
+
             <Columns>
                  <asp:BoundField DataField="name" HeaderText="Name" />
                  <asp:BoundField DataField="description" HeaderText="Description" />
@@ -31,11 +46,10 @@
             
          </asp:GridView>
 
-        <asp:ObjectDataSource ID="dsProjects" runat="server" EnablePaging="true" SelectMethod="GetProjects"
-            SelectCountMethod="GetProjectsCount" TypeName="Projects" MaximumRowsParameterName="maxRows"
-            StartRowIndexParameterName="startIndex">
 
-        </asp:ObjectDataSource>
+         <asp:SqlDataSource ID="SqlDataSourceLogs" runat="server" ConnectionString="<%$ ConnectionStrings:Pontaje_v2ConnectionString %>" SelectCommand="SELECT * FROM [Projects]">
+         </asp:SqlDataSource>
+
         <p>
             <asp:Button ID="ButtonLogout" runat="server" OnClick="ButtonLogout_Click" Text="Logout" />
         </p>

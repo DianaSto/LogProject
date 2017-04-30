@@ -48,27 +48,21 @@ public partial class Login : System.Web.UI.Page
 
     protected void ButtonLogin_Click(object sender, EventArgs e)
     {
-        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-SJS4A6Q\SQLEXPRESS;Initial Catalog=Pontaje_v2;Integrated Security=True");
-        SqlCommand cmd = new SqlCommand("select * from Users where username=@user and password=@pass", con);
-        con.Open();
+        PontajeEntities pe = new PontajeEntities();
         string username = TextBoxUsername.Text;
-        cmd.Parameters.AddWithValue("@user", username);
-        cmd.Parameters.AddWithValue("@pass", GetHashedText(TextBoxPassword.Text));
-        SqlDataReader re = cmd.ExecuteReader();
-        if (re.Read())
+        string password = GetHashedText(TextBoxPassword.Text);
+        var u=(from user in pe.Users where user.username==username && user.password == password select user).FirstOrDefault();
+        if (u != null)
         {
             Session["username"] = TextBoxUsername.Text;
-
-            PontajeEntities pe = new PontajeEntities();
-            
             int id_user = (from user in pe.Users where user.username == username select user.id).FirstOrDefault();
-            int id_role= (from user in pe.Users where user.username == username select user.id_role).FirstOrDefault();
-            string user_role= (from roles in pe.Roles where roles.id == id_role select roles.name).FirstOrDefault().ToString();
-            if (user_role=="Admin")
+            int id_role = (from user in pe.Users where user.username == username select user.id_role).FirstOrDefault();
+            string user_role = (from roles in pe.Roles where roles.id == id_role select roles.name).FirstOrDefault().ToString();
+            if (user_role == "Admin")
             {
                 Response.Redirect("AdminMain.aspx");
             }
-            else if (user_role=="Normal user")
+            else if (user_role == "Normal user")
             {
                 Response.Redirect("Main.aspx");
             }
@@ -77,8 +71,7 @@ public partial class Login : System.Web.UI.Page
         }
         else
         {
-            Response.Write("Wrong password");
+            LabelWrong.Visible = true;
         }
-        con.Close();
     }
 }

@@ -48,6 +48,11 @@ public partial class Role
     public string description { get; set; }
 
     public virtual ICollection<User> Users { get; set; }
+
+    public static implicit operator Role(int v)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public partial class User
@@ -67,4 +72,6 @@ public partial class User
 
     public virtual Role Role { get; set; }
     public virtual ICollection<Pontaje> Pontajes { get; set; }
+
+   
 }

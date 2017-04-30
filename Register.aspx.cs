@@ -9,6 +9,7 @@ using System.Data;
 using System.Text;
 using System.Security.Cryptography;
 
+
 public partial class Register : System.Web.UI.Page
 {
     private string GetHashedText(string inputData)
@@ -26,45 +27,44 @@ public partial class Register : System.Web.UI.Page
 
     protected void ButtonRegister_Click(object sender, EventArgs e)
     {
-        using (SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-SJS4A6Q\SQLEXPRESS;Initial Catalog=Pontaje_v2;Integrated Security=True"))
-        using (SqlCommand sc = new SqlCommand("insert into Users values(@firstname, @lastname, @email, @username, @password, @role)", con))
+        LabelMismatch.Visible = false;
+        LabelUsernameExists.Visible = false;
+        PontajeEntities pe = new PontajeEntities();
+        User user = new User();
+        user.first_name = TextBoxFirstName.Text;
+        user.last_name = TextBoxLastName.Text;
+        user.email = TextBoxEmail.Text;
+        user.username = TextBoxUsername.Text;
+        user.password = GetHashedText(TextBoxPassword.Text);
+        var check_username = (from u in pe.Users where u.username == TextBoxUsername.Text select u).Count();
+        if (check_username == 1)
         {
-            con.Open();
-            string username = TextBoxUsername.Text;
-            sc.Parameters.AddWithValue("@firstname", TextBoxFirstName.Text);
-            sc.Parameters.AddWithValue("@lastname", TextBoxLastName.Text);
-            sc.Parameters.AddWithValue("@email", TextBoxEmail.Text);
-            sc.Parameters.AddWithValue("@username", username);
-            SqlCommand check_username = new SqlCommand("select count (*) from Users where username= @username",con);
-            check_username.Parameters.AddWithValue("@username", TextBoxUsername.Text);
-            int count = Convert.ToInt32(check_username.ExecuteScalar());
-            sc.Parameters.AddWithValue("@password", GetHashedText(TextBoxPassword.Text));
-            if (count != 0)
+            LabelUsernameExists.Visible = true;
+        }
+        else
+        {
+            if (TextBoxUsername.Text != TextBoxConfirmPassword.Text)
             {
-                Response.Write("Username already exists!");
+                LabelMismatch.Visible = true;
             }
             else
             {
-                
-
-                PontajeEntities pe = new PontajeEntities();
-               
-                int number_users = (from user in pe.Users select user).Count();
+                int number_users = (from u in pe.Users select u).Count();
                 if (number_users == 0)
                 {
-                    sc.Parameters.AddWithValue("@role", 1);
-                   
+                    user.id_role = 1;
+
                 }
                 else
                 {
-                    sc.Parameters.AddWithValue("@role", 2);
-                   
-                }
-                sc.ExecuteNonQuery();
-                Response.Redirect("Login.aspx");
+                    user.id_role = 2;
 
+                }
+                pe.Users.Add(user);
+                pe.SaveChanges();
+                Response.Redirect("Login.aspx");
             }
-            con.Close();
+           
         }
     }
 

@@ -38,6 +38,7 @@
             ErrorMessage="Required field."
             ForeColor="Red">
         </asp:RequiredFieldValidator>
+            <asp:Label ID="LabelUsernameExists" runat="server" Text="Username already exists!" Visible="False"></asp:Label>
         </p>
         <asp:TextBox ID="TextBoxPassword" placeholder="Password" TextMode="Password" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator id="RequiredFieldValidatorPassword" runat="server"
@@ -48,12 +49,13 @@
         <p>
             <asp:TextBox ID="TextBoxConfirmPassword" placeholder="Confirm Password" TextMode="Password" runat="server" ></asp:TextBox>
             <asp:RequiredFieldValidator id="RequiredFieldValidatorConfirmPassword" runat="server"
-          ControlToValidate="TextBoxPassword"
+          ControlToValidate="TextBoxConfirmPassword"
           ErrorMessage="Required field."
           ForeColor="Red">
         </asp:RequiredFieldValidator>
+            <asp:Label ID="LabelMismatch" runat="server" Text="Password mismatch!" Visible="False"></asp:Label>
+            <br/>
         </p>
-        <asp:CompareValidator runat="server" ID="Comp1" ControlToValidate="textBoxPassword" ControlToCompare="TextBoxConfirmPassword" Text="Password mismatch" />
         <p>
             <asp:Button ID="ButtonRegister" runat="server" OnClick="ButtonRegister_Click" Text="Register" Width="124px" />
         </p>

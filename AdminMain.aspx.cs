@@ -13,18 +13,18 @@ public partial class AdminMain : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+       
     }
 
     protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
     {
         int index = Int32.Parse(e.Item.Value);
         multiTabs.ActiveViewIndex = index;
+        GridViewPontaje.DataBind();
     }
 
     protected void GridView_Logs(object sender, GridViewCommandEventArgs e)
     {
-
         PontajeEntities entities = new PontajeEntities();
         var name = Session["username"];
         var id_user = (from user in entities.Users where user.username == name.ToString() select user.id).FirstOrDefault();
@@ -88,8 +88,7 @@ public partial class AdminMain : System.Web.UI.Page
         pe.Projects.Add(proiect);
         pe.SaveChanges();
         GridViewProjects.DataBind();
-
-
+        GridViewPontaje.DataBind();
       
     }
 

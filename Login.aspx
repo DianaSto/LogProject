@@ -20,6 +20,9 @@
             <asp:Button ID="ButtonRegister" runat="server" Height="30px" Text="Register"  Width="90px" OnClick="ButtonRegister_Click"/>
 
         </p>
+        <p>
+            <asp:Label ID="LabelWrong" runat="server" Text="Wrong username or password" Visible="False"></asp:Label>
+        </p>
     </form>
 </body>
 </html>
