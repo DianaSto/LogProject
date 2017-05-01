@@ -7,58 +7,63 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
+    <link href="Theme/Style.css" rel="stylesheet" type="text/css" />
+    <div class="Base">
+    <div class="Register_div">
+    <form id="form1" runat="server" class="Register_Form">
     
-    </div>
-        <asp:TextBox ID="TextBoxFirstName" placeholder="First Name" runat="server"></asp:TextBox>
+        <h1>Register</h1>
+       
+        <asp:TextBox ID="TextBoxFirstName" placeholder="First Name" runat="server" CssClass="Register_TextFields"></asp:TextBox>
         <asp:RequiredFieldValidator id="RequiredFieldValidatorFirstName" runat="server"
           ControlToValidate="TextBoxFirstName"
           ErrorMessage="Required field."
           ForeColor="Red">
         </asp:RequiredFieldValidator>
         <p>
-            <asp:TextBox ID="TextBoxLastName" placeholder="Last Name" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxLastName" placeholder="Last Name" runat="server" CssClass="Register_TextFields"></asp:TextBox>
             <asp:RequiredFieldValidator id="RequiredFieldValidatorLastName" runat="server"
             ControlToValidate ="TextBoxLastName"
             ErrorMessage="Required field."
             ForeColor="Red">
         </asp:RequiredFieldValidator>
         </p>
-        <asp:TextBox ID="TextBoxEmail" placeholder="Email" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBoxEmail" placeholder="Email" runat="server" CssClass="Register_TextFields"></asp:TextBox>
         <asp:RequiredFieldValidator id="RequiredFieldValidatorEmail" runat="server"
           ControlToValidate="TextBoxEmail"
           ErrorMessage="Required field."
           ForeColor="Red">
         </asp:RequiredFieldValidator>
         <p>
-            <asp:TextBox ID="TextBoxUsername" placeholder="Username" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUsername" placeholder="Username" runat="server" CssClass="Register_TextFields"></asp:TextBox>
             <asp:RequiredFieldValidator id="RequiredFieldValidatorUsername" runat="server"
             ControlToValidate="TextBoxUsername"
             ErrorMessage="Required field."
             ForeColor="Red">
         </asp:RequiredFieldValidator>
-            <asp:Label ID="LabelUsernameExists" runat="server" Text="Username already exists!" Visible="False"></asp:Label>
+            <asp:Label ID="LabelUsernameExists" runat="server" Text="Username already exists!" Visible="False" CssClass="Register_lbl"></asp:Label>
         </p>
-        <asp:TextBox ID="TextBoxPassword" placeholder="Password" TextMode="Password" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBoxPassword" placeholder="Password" TextMode="Password" runat="server" CssClass="Register_TextFields"></asp:TextBox>
         <asp:RequiredFieldValidator id="RequiredFieldValidatorPassword" runat="server"
           ControlToValidate="TextBoxPassword"
           ErrorMessage="Required field."
           ForeColor="Red">
         </asp:RequiredFieldValidator>
         <p>
-            <asp:TextBox ID="TextBoxConfirmPassword" placeholder="Confirm Password" TextMode="Password" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="TextBoxConfirmPassword" placeholder="Confirm Password" TextMode="Password" runat="server" CssClass="Register_TextFields" ></asp:TextBox>
             <asp:RequiredFieldValidator id="RequiredFieldValidatorConfirmPassword" runat="server"
           ControlToValidate="TextBoxConfirmPassword"
           ErrorMessage="Required field."
           ForeColor="Red">
         </asp:RequiredFieldValidator>
-            <asp:Label ID="LabelMismatch" runat="server" Text="Password mismatch!" Visible="False"></asp:Label>
+            <asp:Label ID="LabelMismatch" runat="server" Text="Password mismatch!" Visible="False" CssClass="Register_lbl"></asp:Label>
             <br/>
         </p>
         <p>
-            <asp:Button ID="ButtonRegister" runat="server" OnClick="ButtonRegister_Click" Text="Register" Width="124px" />
+            <asp:Button ID="ButtonRegister" runat="server"  Text="REGISTER" Width="124px"  OnClick="ButtonRegister_Click"/>
         </p>
     </form>
+    </div>
+    </div>
 </body>
 </html>

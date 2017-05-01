@@ -8,7 +8,7 @@
 </head>
 <body>
     <link href="Theme/Style.css" rel="stylesheet" type="text/css" />
-    <div class="Login">
+    <div class="Base">
      <div class="Login_Div">  
          
     <form id="form1" runat="server" class="Login_Form">

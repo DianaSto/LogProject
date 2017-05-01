@@ -1,4 +1,4 @@
-﻿.Login
+﻿.Base
 {
     width:100vw; height:100vh; background:#f0f8ff; display:table;
 }
@@ -54,4 +54,42 @@
 {
     float: left; font: bold 12px segoe ui; color: #ff0000; padding-left: 20px; font-size:13px;
     margin: 20px 0px 0px 20px; 
+}
+.Register_div
+{
+      margin-left:auto; margin-right:auto;  vertical-align:middle;
+      text-align: center;  display: table-cell;
+}
+.Register_Form
+{
+    width:400px; height: 700px; background: #fff; border-radius: 10px; border-bottom: 3px solid #b5caff;  
+    display: inline-block;  text-align: center; vertical-align:middle;
+}
+.Register_Form h1
+{
+    font-family:Calibri; font-size:20px; color: #fff; background: #6189df; text-align:left;
+    padding-left: 15px; text-transform: uppercase; line-height: 2; border-left: 2px solid #244180;
+    border-right: 2px solid #244180;
+   
+}
+.Register_TextFields 
+{
+    float: left; margin: 20px 0px 0px 18px; width: 350px; height: 32px;
+    padding-left: 10px; font-family: Segoe ui ; font-size: 13px; font-weight: bold;
+    border: 1px solid #ccc; border-radius: 8px;
+}
+.Register_Form input:focus 
+{
+    border: 1px solid #f90;
+    outline: none;
+}
+.Register_button 
+{
+    float: left; background: #e9e9e9; color: #6189df; font-family: Calibri; font-size: 17px; font-weight: bold; 
+    border: 1px solid #b8cfff; border-radius: 6px; margin: 15px 0px 70px 140px; padding: 6px 10px 4px 10px;
+}
+.Register_lbl 
+{
+    float: left; font: bold 12px segoe ui; color: #ff0000;  font-size:13px; margin-left: 50px;
+    
 }

@@ -43,7 +43,7 @@ public partial class Register : System.Web.UI.Page
         }
         else
         {
-            if (TextBoxUsername.Text != TextBoxConfirmPassword.Text)
+            if (GetHashedText(TextBoxPassword.Text )!= GetHashedText(TextBoxConfirmPassword.Text))
             {
                 LabelMismatch.Visible = true;
             }
