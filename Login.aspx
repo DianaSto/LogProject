@@ -7,22 +7,29 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
+    <link href="Theme/Style.css" rel="stylesheet" type="text/css" />
+    <div class="Login">
+     <div class="Login_Div">  
+         
+    <form id="form1" runat="server" class="Login_Form">
+       <h1>Login</h1>
+       <br/> <br/>
     
-    </div>
-        <asp:TextBox ID="TextBoxUsername" Placeholder="Username" runat="server" OnTextChanged="TextBoxUsername_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxUsername" Placeholder="USERNAME" runat="server"  CssClass="Login_username" OnTextChanged="TextBoxUsername_TextChanged"></asp:TextBox>
         <p>
-            <asp:TextBox ID="TextBoxPassword" TextMode="Password" Placeholder="Password" runat="server" OnTextChanged="TextBoxPassword_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="TextBoxPassword" TextMode="Password" Placeholder="PASSWORD" runat="server"  CssClass="Login_password" OnTextChanged="TextBoxPassword_TextChanged"></asp:TextBox>
         </p>
-        <asp:Button ID="ButtonLogin" runat="server"  Height="30px" Text="Login" Width="90px" OnClick="ButtonLogin_Click" />
+        <asp:Button ID="ButtonLogin" runat="server"  Height="30px" Text="LOGIN" Width="90px"  CssClass="Login_btn" OnClick="ButtonLogin_Click"/>
         <p>
-            <asp:Button ID="ButtonRegister" runat="server" Height="30px" Text="Register"  Width="90px" OnClick="ButtonRegister_Click"/>
+            <asp:Button ID="ButtonRegister" runat="server" Height="30px" Text="REGISTER"  Width="90px" CssClass="Register_btn" OnClick="ButtonRegister_Click"/>
 
         </p>
+        <br/><br/>
         <p>
-            <asp:Label ID="LabelWrong" runat="server" Text="Wrong username or password" Visible="False"></asp:Label>
+            <asp:Label ID="LabelWrong" runat="server" Text="Wrong username or password!" Visible="False" CssClass="Login_lbl"></asp:Label>
         </p>
     </form>
+    </div>
+    </div>
 </body>
 </html>
