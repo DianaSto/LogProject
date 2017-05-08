@@ -86,7 +86,14 @@ public partial class AdminMain : System.Web.UI.Page
         proiect.name = TextBoxName.Text;
         proiect.description = TextBoxDescription.Text;
         pe.Projects.Add(proiect);
-        pe.SaveChanges();
+        try
+        {
+            pe.SaveChanges();
+        }
+        catch (Exception err)
+        {
+            Response.Write("The project name can have a maximum of 50 characters, while the project description 255.");
+        }
         GridViewProjects.DataBind();
         GridViewPontaje.DataBind();
       

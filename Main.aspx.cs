@@ -68,4 +68,10 @@ public partial class Main : System.Web.UI.Page
       
     }
 
+
+    protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+    {
+        int index = Int32.Parse(e.Item.Value);
+        multiTabs.ActiveViewIndex = index;
+    }
 }

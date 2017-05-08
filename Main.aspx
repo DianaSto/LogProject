@@ -8,11 +8,35 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        Successfully logged in as normal user
-    </div>
-        <asp:GridView ID="gvProjects" CssClass="Grid" runat="server" AutoGenerateColumns="false"  PageSize="10" AllowPaging="true" DataSourceID="SqlDataSourceLogs" OnRowCommand="GridView_RowCommand">
+    <link href="Theme/Style.css" rel="stylesheet" type="text/css" />
+    <div class="Base">
+    <form id="form1" runat="server"  class="Main_Div">
+         
+       <h1>
+         <asp:Menu ID="Menu1" runat="server" OnMenuItemClick="Menu1_MenuItemClick" Orientation="Horizontal">
+            <Items>
+                <asp:MenuItem Selected="True" Text="Log work" Value="0"></asp:MenuItem>
+                <asp:MenuItem Text="Calendar" Value="1"></asp:MenuItem>
+                <asp:MenuItem  Text="Reports" Value="2"></asp:MenuItem>
+                 
+            </Items>
+             <staticmenuitemstyle BorderWidth="10px" BorderColor="#6189df"  forecolor="Black"/>
+        </asp:Menu>
+           </h1>   
+      
+    
+         
+           
+        <div runat="server" id="ScrollList" class="Main_Menu_div">
+        <asp:MultiView ID="multiTabs" runat="server" ActiveViewIndex="0" >
+                
+              
+         <asp:View ID="ViewPontaje" runat="server" >
+
+            
+
+        
+        <asp:GridView ID="gvProjects" CssClass="grid" runat="server" AutoGenerateColumns="false"  RowStyle-Wrap="true" PageSize="10" AllowPaging="true" DataSourceID="SqlDataSourceLogs" OnRowCommand="GridView_RowCommand">
 
              <EmptyDataRowStyle CssClass="EmptyData" />
                 <EmptyDataTemplate>
@@ -28,31 +52,51 @@
                </EmptyDataTemplate>
 
             <Columns>
-                 <asp:BoundField DataField="name" HeaderText="Name" />
-                 <asp:BoundField DataField="description" HeaderText="Description" />
+              
+                 <asp:BoundField DataField="name" HeaderText="Name"  ItemStyle-Width="30%" />
+                 <asp:BoundField DataField="description" HeaderText="Description" ItemStyle-Width="50%"/>
 
-                 <asp:TemplateField ShowHeader="False">
+                 <asp:TemplateField ShowHeader="False" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <asp:Button ID="ButtonStart" runat="server" CommandName="Start"  CommandArgument='<%# Eval("id") %>'  Text="Start working" ></asp:Button>
+                        <asp:Button ID="ButtonStart" runat="server" CommandName="Start"  CommandArgument='<%# Eval("id") %>'  Text="Start working" CssClass="Main_btn"></asp:Button>
                      </ItemTemplate>
                  </asp:TemplateField>
 
-                <asp:TemplateField ShowHeader="False">
+                <asp:TemplateField ShowHeader="False" HeaderStyle-Width="50%" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <asp:Button ID="ButtonStop" runat="server" CommandName="Stop"  CommandArgument='<%# Eval("id") %>'  Text="Stop working" />
+                        <asp:Button ID="ButtonStop" runat="server" CommandName="Stop"  CommandArgument='<%# Eval("id") %>'  Text="Stop working" CssClass="Main_btn" />
                     </ItemTemplate>
                 </asp:TemplateField>
              </Columns>
             
          </asp:GridView>
-
-
+        
+        
          <asp:SqlDataSource ID="SqlDataSourceLogs" runat="server" ConnectionString="<%$ ConnectionStrings:Pontaje_v2ConnectionString %>" SelectCommand="SELECT * FROM [Projects]">
          </asp:SqlDataSource>
+        
+        </asp:View>
 
-        <p>
-            <asp:Button ID="ButtonLogout" runat="server" OnClick="ButtonLogout_Click" Text="Logout" />
-        </p>
-    </form>
+            <asp:View ID="ViewCalendar" runat="server">
+
+            </asp:View>
+
+            <asp:View ID="ViewReports" runat="server">
+
+            </asp:View>
+
+        </asp:MultiView>
+                
+            
+      
+    </div>
+        
+           <div class="Main_footer" runat="server">
+            
+            <asp:Button ID="ButtonLogout" runat="server" OnClick="ButtonLogout_Click" Text="Logout" cssClass="Main_login_btn"/>
+            </div>
+          
+    </form>       
+    </div>
 </body>
 </html>

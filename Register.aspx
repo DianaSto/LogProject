@@ -60,7 +60,7 @@
             <br/>
         </p>
         <p>
-            <asp:Button ID="ButtonRegister" runat="server"  Text="REGISTER" Width="124px"  OnClick="ButtonRegister_Click"/>
+            <asp:Button ID="ButtonRegister" runat="server"  Text="REGISTER" Width="124px"  OnClick="ButtonRegister_Click" CssClass="Register_button"/>
         </p>
     </form>
     </div>
