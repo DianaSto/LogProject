@@ -11,9 +11,26 @@ using System.Windows.Forms;
 
 public partial class AdminMain : System.Web.UI.Page
 {
+    PontajeEntities entities = new PontajeEntities();
+    Dictionary<Pontaje, string> data = new Dictionary<Pontaje, string>();
+
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+
+        var name = Session["username"];
+        var id_user = (from user in entities.Users where user.username == name.ToString() select user.id).FirstOrDefault();
+        /* var pontaje= (from pontaj in entities.Pontajes where pontaj.id_user == id_user select pontaj).ToList();
+         foreach (var p in pontaje)
+         {
+             data.Add(p);
+         }*/
+        var data_logged_work = (from pontaj in entities.Pontajes where pontaj.id_user == id_user select pontaj).ToList();
+        foreach (var dlw in data_logged_work)
+        {
+            var proj = (from project in entities.Projects where project.id == dlw.id_project select project.name).FirstOrDefault();
+            data.Add(dlw, proj);
+        }
+
     }
 
     protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
@@ -155,5 +172,24 @@ public partial class AdminMain : System.Web.UI.Page
     {
         Session.RemoveAll();
         Response.Redirect("Login.aspx");
+    }
+
+    protected void AttachEvents(object sender, DayRenderEventArgs e)
+    {
+
+        DateTime day;
+        // var name = Session["username"];
+        // var id_user = (from user in entities.Users where user.username == name.ToString() select user.id).FirstOrDefault();
+        foreach (var p in data)
+        {
+            // var proj= (from project in entities.Projects where project.id == p.id_project select project.name).FirstOrDefault();
+            day = (DateTime)p.Key.start_time;
+
+            if (day.Date == e.Day.Date)
+            {
+                e.Cell.Controls.Add(new LiteralControl("<p>" + p.Value + "\n" + p.Key.Hours_worked + "hours <p>"));
+                e.Cell.Font.Bold = true;
+            }
+        }
     }
 }

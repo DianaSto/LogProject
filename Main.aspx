@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Main.aspx.cs" Inherits="Main" %>
 
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,8 +17,8 @@
        <h1>
          <asp:Menu ID="Menu1" runat="server" OnMenuItemClick="Menu1_MenuItemClick" Orientation="Horizontal">
             <Items>
-                <asp:MenuItem Selected="True" Text="Log work" Value="0"></asp:MenuItem>
-                <asp:MenuItem Text="Calendar" Value="1"></asp:MenuItem>
+                <asp:MenuItem  Selected="True" Text="Log work" Value="0"></asp:MenuItem>
+                <asp:MenuItem  Text="Calendar" Value="1"></asp:MenuItem>
                 <asp:MenuItem  Text="Reports" Value="2"></asp:MenuItem>
                  
             </Items>
@@ -78,11 +80,30 @@
         </asp:View>
 
             <asp:View ID="ViewCalendar" runat="server">
+                <asp:Calendar ID="CalendarEvents"  OnDayRender="AttachEvents" runat="server"
+                    Width="100%" Height="100%">
+                    <TodayDayStyle ForeColor="White" BackColor="#FFCC66"></TodayDayStyle>
+        <SelectorStyle BackColor="#FFCC66"></SelectorStyle>
+        <NextPrevStyle Font-Size="9pt" ForeColor="#FFFFCC"></NextPrevStyle>
+        <DayHeaderStyle Height="1px" BackColor="#FFCC66"></DayHeaderStyle>
+        <SelectedDayStyle Font-Bold="True" BackColor="#CCCCFF"></SelectedDayStyle>
+        <TitleStyle Font-Size="9pt" Font-Bold="True" ForeColor="#FFFFCC" BackColor="#990000"></TitleStyle>
+        <OtherMonthDayStyle ForeColor="#CC9966"></OtherMonthDayStyle>
+                    
 
+                </asp:Calendar>
+            
             </asp:View>
 
             <asp:View ID="ViewReports" runat="server">
-
+                <asp:Chart ID="Chart1" runat="server">
+                    <Series>
+                        <asp:Series Name="Series1"></asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                    </ChartAreas>
+                </asp:Chart>
             </asp:View>
 
         </asp:MultiView>

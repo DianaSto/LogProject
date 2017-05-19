@@ -19,8 +19,9 @@
         <asp:Menu ID="Menu1" runat="server" OnMenuItemClick="Menu1_MenuItemClick" Orientation="Horizontal">
             <Items>
                 <asp:MenuItem Text="Log work" Value="0"></asp:MenuItem>
-                <asp:MenuItem Text="Manage users" Value="1"></asp:MenuItem>
-                <asp:MenuItem Selected="True" Text="Manage projects" Value="2"></asp:MenuItem>
+                <asp:MenuItem Text="Calendar" Value="1"></asp:MenuItem>
+                <asp:MenuItem Text="Manage users" Value="2"></asp:MenuItem>
+                <asp:MenuItem Selected="True" Text="Manage projects" Value="3"></asp:MenuItem>
             </Items>
             <staticmenuitemstyle BorderWidth="10px" BorderColor="#6189df"  forecolor="Black"/>
         </asp:Menu>
@@ -73,6 +74,24 @@
             </asp:SqlDataSource>
 
           </asp:View>
+
+          
+            <asp:View ID="ViewCalendar" runat="server">
+                <asp:Calendar ID="CalendarEvents"  OnDayRender="AttachEvents" runat="server"
+                    Width="100%" Height="100%">
+                    <TodayDayStyle ForeColor="White" BackColor="#FFCC66"></TodayDayStyle>
+        <SelectorStyle BackColor="#FFCC66"></SelectorStyle>
+        <NextPrevStyle Font-Size="9pt" ForeColor="#FFFFCC"></NextPrevStyle>
+        <DayHeaderStyle Height="1px" BackColor="#FFCC66"></DayHeaderStyle>
+        <SelectedDayStyle Font-Bold="True" BackColor="#CCCCFF"></SelectedDayStyle>
+        <TitleStyle Font-Size="9pt" Font-Bold="True" ForeColor="#FFFFCC" BackColor="#990000"></TitleStyle>
+        <OtherMonthDayStyle ForeColor="#CC9966"></OtherMonthDayStyle>
+                    
+
+                </asp:Calendar>
+            
+            </asp:View>
+
 
             
           <asp:View ID="ViewUsers" runat="server">
@@ -186,7 +205,6 @@
 
          </asp:View>
              
-
 
       </asp:MultiView>
   </div>

@@ -17,6 +17,7 @@ public partial class Pontaje
     public int id_project { get; set; }
     public Nullable<System.DateTime> start_time { get; set; }
     public Nullable<System.DateTime> finish_time { get; set; }
+    public Nullable<int> Hours_worked { get; set; }
 
     public virtual Project Project { get; set; }
     public virtual User User { get; set; }
@@ -48,11 +49,6 @@ public partial class Role
     public string description { get; set; }
 
     public virtual ICollection<User> Users { get; set; }
-
-    public static implicit operator Role(int v)
-    {
-        throw new NotImplementedException();
-    }
 }
 
 public partial class User
@@ -72,6 +68,10 @@ public partial class User
 
     public virtual Role Role { get; set; }
     public virtual ICollection<Pontaje> Pontajes { get; set; }
+}
 
-   
+public partial class GetHoursPerProjectforUser_Result
+{
+    public string name { get; set; }
+    public Nullable<int> worked_hours { get; set; }
 }

@@ -10,6 +10,9 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core.Objects;
+using System.Data.Objects.DataClasses;
+using System.Linq;
 
 public partial class PontajeEntities : DbContext
 {
@@ -27,4 +30,13 @@ public partial class PontajeEntities : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Pontaje> Pontajes { get; set; }
+
+    public virtual ObjectResult<GetHoursPerProjectforUser_Result> GetHoursPerProjectforUser(Nullable<int> id_user)
+    {
+        var id_userParameter = id_user.HasValue ?
+            new ObjectParameter("Id_user", id_user) :
+            new ObjectParameter("Id_user", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetHoursPerProjectforUser_Result>("GetHoursPerProjectforUser", id_userParameter);
+    }
 }
